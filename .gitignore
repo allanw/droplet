@@ -1,1 +1,3 @@
 *.pyc
+.s_token
+.s_secret

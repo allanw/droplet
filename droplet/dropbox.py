@@ -3,6 +3,7 @@ from bottle import redirect, request
 from dropbox.client import DropboxClient
 from dropbox.session import DropboxSession, OAuthToken
 from dropbox.rest import ErrorResponse
+from contextlib import closing
 import os
 
 def read_file(fname):
