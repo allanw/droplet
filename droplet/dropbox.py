@@ -5,6 +5,7 @@ from dropbox.session import DropboxSession, OAuthToken
 from dropbox.rest import ErrorResponse
 from contextlib import closing
 import os
+import redis
 
 def read_file(fname):
     try:
@@ -13,9 +14,13 @@ def read_file(fname):
     except IOError:
         return None
 
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis = redis.from_url(redis_url)
+
 class Dropbox(object):
     def __init__(self):
         self.client = None
+        redis.set('spam', 'eggs')
 
     def read_file(self, fname):
         with closing(self.client.get_file(fname)) as r:
