@@ -20,7 +20,6 @@ redis = redis.from_url(redis_url)
 class Dropbox(object):
     def __init__(self):
         self.client = None
-        redis.set('spam', 'eggs')
 
     def read_file(self, fname):
         with closing(self.client.get_file(fname)) as r:
@@ -28,15 +27,17 @@ class Dropbox(object):
 
     def connect(self, query):
         sess = DropboxSession(self.app_key, self.app_secret, "app_folder")
-        s_token = read_file('.s_token')
-        s_secret = read_file('.s_secret')
+        s_token = redis.get('s_token') or read_file('.s_token')
+        s_secret = redis.get('s_secret') or read_file('.s_secret')
         if s_token and s_secret:
             sess.set_token(s_token, s_secret)
         elif 'oauth_token' in request.query:
             r_token = read_file('.r_token')
             r_token_secret = read_file('.r_secret')
             s_token = sess.obtain_access_token(OAuthToken(
-                        r_token, r_token_secret)) #todo - store these in redis
+                        r_token, r_token_secret))
+            redis.set('s_token', s_token.key)
+            redis.set('s_secret', s_token.secret)
             with open('.s_token', 'w') as f:
                 f.write(s_token.key)
             with open('.s_secret', 'w') as f:
