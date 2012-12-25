@@ -1,4 +1,4 @@
-from bottle import route, run, redirect, request, abort
+from bottle import route, redirect, request, abort
 from dropbox import Dropbox
 import os
 
@@ -19,5 +19,3 @@ def index(pagename):
 
 def listing():
     return dropbox.client.search("/", ".md")
-
-run(host='localhost', port=8090)
