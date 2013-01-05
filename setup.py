@@ -14,7 +14,7 @@ setup(
     author="Al Whatmough",
     url="https://github.com/allanw/droplet",
     install_requires=[
-        "bottle", "dropbox", "redis", "markdown", "pygments",
+        "bottle", "dropbox", "boto", "redis", "markdown", "pygments",
     ],
     packages=["droplet"],
     classifiers=[
