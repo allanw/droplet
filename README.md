@@ -1,1 +1,1 @@
-A Dropbox-based blog engine written using the Bottle web framework.
+A simple Dropbox-based static-site generator written using the Bottle web framework.
