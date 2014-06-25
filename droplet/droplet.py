@@ -8,14 +8,19 @@ from contextlib import closing
 APP_KEY = os.environ['DROPBOX_APP_KEY']
 APP_SECRET = os.environ['DROPBOX_APP_SECRET']
 
+BLOG_POST_DIR = '/posts/'
+
 TEMPLATE_PATH.append('./droplet/templates')
 
 def read_file(fname):
-    with closing(open(fname)) as f:
-        return f.read().decode('utf-8')
+    if os.path.exists(fname):
+        with closing(open(fname)) as f:
+            return f.read().decode('utf-8')
+    else:
+        return None
 
 def get_client():
-    sess = DropboxSession(APP_KEY, APP_SECRET, "app_folder")
+    sess = DropboxSession(APP_KEY, APP_SECRET, "dropbox")
     s_token = read_file('.s_token')
     s_secret = read_file('.s_secret')
     if s_token and s_secret:
@@ -60,34 +65,40 @@ def get_markdown():
 
 def listing():
     client = get_client()
-    files = client.search("/", ".md")
+    files = client.search(BLOG_POST_DIR, ".md")
     posts = []
     for f in files:
         src = client.get_file(f['path']).read()
         mdown = get_markdown()
-        html = mdown.convert(src)
-        if "title" in mdown.Meta and "date" in mdown.Meta:
-            posts.append({
-                "path": f["path"][:-3],
-                "title": mdown.Meta["title"][0],
-                "date": mdown.Meta["date"][0],
-                "html": html
-            })
+        try:
+            html = mdown.convert(src)
+        except UnicodeDecodeError, e:
+            print f['path'], e
+        try:
+            if "title" in mdown.Meta and "date" in mdown.Meta:
+                posts.append({
+                    "path": mdown.Meta["slug"][0],
+                    "title": mdown.Meta["title"][0],
+                    "date": mdown.Meta["date"][0],
+                    "html": html
+                })
+        except AttributeError, e:
+            print e
     return posts
 
 @route('/')
 def index():
     return template('list', posts=listing())
 
+@route('/<pagename>')
 @route('/<pagename>/')
 def page(pagename):
     client = get_client()
-    post_listing = client.search("/", ".md")
+    post_listing = client.search(BLOG_POST_DIR, ".md")
     url_listing = [p["path"] for p in post_listing]
-    if "/" + pagename + ".md" not in url_listing:
+    if BLOG_POST_DIR + pagename + ".md" not in url_listing:
         abort(404, "File not found")
-    post_index = url_listing.index("/" + pagename + ".md")
-    src = client.get_file(pagename + ".md").read()
+    src = client.get_file(BLOG_POST_DIR + pagename + ".md").read()
     mdown = get_markdown()
     html = mdown.convert(src)
     return template('post', body=html)
