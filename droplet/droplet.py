@@ -22,11 +22,6 @@ if REDISTOGO_URL == None:
     redis_url = '127.0.0.1:6379'
 else:
     redis_url = REDISTOGO_URL
-    redis_url = redis_url.split('redis://redistogo:')[1]
-    redis_url = redis_url.split('/')[0]
-    REDIS_PWD, REDIS_HOST = redis_url.split('@', 1)
-    redis_url = "%s?password=%s" % (REDIS_HOST, REDIS_PWD)
-    session_opts = { 'session.type': 'redis', 'session.url': redis_url, 'session.data_dir': './cache/', 'session.key': 'appname', 'session.auto': True, }
 
 def read_file(fname):
     if os.path.exists(fname):
@@ -37,6 +32,7 @@ def read_file(fname):
 
 def get_client():
     sess = DropboxSession(APP_KEY, APP_SECRET, "dropbox")
+    import pdb;pdb.set_trace()
     redis_client = redis.from_url(redis_url)
     s_token = redis_client.get('.s_token') if redis_available else read_file('.s_token')
     s_secret = redis_client.get('.s_secret') if redis_available else read_file('.s_secret')
