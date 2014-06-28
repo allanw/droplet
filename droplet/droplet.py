@@ -32,7 +32,6 @@ def read_file(fname):
 
 def get_client():
     sess = DropboxSession(APP_KEY, APP_SECRET, "dropbox")
-    import pdb;pdb.set_trace()
     redis_client = redis.from_url(redis_url)
     s_token = redis_client.get('.s_token') if redis_available else read_file('.s_token')
     s_secret = redis_client.get('.s_secret') if redis_available else read_file('.s_secret')
