@@ -4,6 +4,11 @@ import markdown
 from dropbox.client import DropboxClient
 from dropbox.session import DropboxSession, OAuthToken
 from contextlib import closing
+try:
+    import redis
+    redis_available = True
+except ImportError:
+    redis_available = False
 
 APP_KEY = os.environ['DROPBOX_APP_KEY']
 APP_SECRET = os.environ['DROPBOX_APP_SECRET']
@@ -11,6 +16,8 @@ APP_SECRET = os.environ['DROPBOX_APP_SECRET']
 BLOG_POST_DIR = '/posts/'
 
 TEMPLATE_PATH.append('./droplet/templates')
+
+REDISTOGO_URL = 'redis://127.0.0.1:6379'
 
 def read_file(fname):
     if os.path.exists(fname):
@@ -21,29 +28,37 @@ def read_file(fname):
 
 def get_client():
     sess = DropboxSession(APP_KEY, APP_SECRET, "dropbox")
-    s_token = read_file('.s_token')
-    s_secret = read_file('.s_secret')
+    redis_client = redis.from_url(REDISTOGO_URL)
+    s_token = redis_client.get('.s_token') if redis_available else read_file('.s_token')
+    s_secret = redis_client.get('.s_secret') if redis_available else read_file('.s_secret')
     if s_token and s_secret:
         sess.set_token(s_token, s_secret)
     elif 'oauth_token' in request.query:
-        r_token = read_file('.r_token')
-        r_token_secret = read_file('.r_secret')
+        r_token = redis_client.get('.r_token') if redis_available else read_file('.r_token')
+        r_token_secret = redis_client.get('.r_secret') if redis_available else read_file('.r_secret')
         s_token = sess.obtain_access_token(OAuthToken(r_token, r_token_secret))
-        # Todo - uncomment these and set up redis
-        # redis.set('s_token', s_token.key)
-        # redis.set('s_secret', s_token.secret)
-        with open('.s_token', 'w') as f:
-            f.write(s_token.key)
-        with open('.s_secret', 'w') as f:
-            f.write(s_token.secret)
-        os.remove('.r_token')
-        os.remove('.r_secret')
+        if redis_available:
+            redis_client.set('.s_token', s_token.key)
+            redis_client.set('.s_secret', s_token.secret)
+            redis_client.delete('.r_token')
+            redis_client.delete('.r_secret')
+        else:
+            with open('.s_token', 'w') as f:
+                f.write(s_token.key)
+            with open('.s_secret', 'w') as f:
+                f.write(s_token.secret)
+            os.remove('.r_token')
+            os.remove('.r_secret')
     else:
         req_token = sess.obtain_request_token()
-        with open(".r_token", "w") as f:
-            f.write(req_token.key)
-        with open(".r_secret", "w") as f:
-            f.write(req_token.secret)
+        if redis_available:
+            redis_client.set('.r_token', req_token.key)
+            redis_client.set('.r_secret', req_token.secret)
+        else:
+            with open(".r_token", "w") as f:
+                f.write(req_token.key)
+            with open(".r_secret", "w") as f:
+                f.write(req_token.secret)
         url = sess.build_authorize_url(req_token, request.url)
         return redirect(url)
     return DropboxClient(sess)
