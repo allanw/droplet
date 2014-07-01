@@ -1,4 +1,4 @@
-from bottle import route, redirect, request, abort, template, TEMPLATE_PATH
+from bottle import route, redirect, request, abort, template, TEMPLATE_PATH, static_file
 import os
 import markdown
 from dropbox.client import DropboxClient
@@ -66,6 +66,14 @@ def get_client():
         url = sess.build_authorize_url(req_token, request.url)
         return redirect(url)
     return DropboxClient(sess)
+
+@route('/<filename:re:.*\.css>')
+def serve_css(filename):
+    return static_file(filename, root='droplet/static/css')
+
+@route('/<filename:re:.*\.js>')
+def serve_js(filename):
+    return static_file(filename, root='droplet/static/js')
 
 @route('/foo')
 def foo():
