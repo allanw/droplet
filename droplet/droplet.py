@@ -75,6 +75,10 @@ def serve_css(filename):
 def serve_js(filename):
     return static_file(filename, root='droplet/static/js')
 
+@route('/fonts/<filename:re:.*\.(eot|ttf|woff|svg)>')
+def serve_fonts(filename):
+    return static_file(filename, root='droplet/static/fonts')
+
 @route('/foo')
 def foo():
     client = get_client()
