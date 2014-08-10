@@ -1,4 +1,4 @@
 % rebase('base.tpl', title='Blog post')
 <p>
-{{!body}}
+    {{!body}}
 </p>
