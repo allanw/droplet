@@ -1,1 +1,1 @@
-A simple Dropbox-based static-site generator.
+A simple Dropbox-based blog generator built using Bottle.
