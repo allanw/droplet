@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="cv">
+<html$if(lang)$ lang="$lang$"$endif$ class="cv">
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
@@ -38,16 +38,7 @@
       <h2 class="title">$title$</h2>
     </div>
     <ul class="details">
-      <!-- phone -->
-      $if(phone)$
-      $if(settings.protect-phone)$
-      $if(privatecv)$
-      <li><a class='phone' href="phoneto:$phone$">$phone$</a></li>
-      $endif$
-      $else$
-      <li><a class='phone' href="phoneto:$phone$">$phone$</a></li>
-      $endif$
-      $endif$
+
       <!-- mobile -->
       $if(mobile)$
       $if(settings.protect-mobile)$
