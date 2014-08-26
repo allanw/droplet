@@ -41,13 +41,7 @@
 
       <!-- email -->
       $if(email)$
-      $if(settings.protect-email)$
-      $if(privatecv)$
       <li><a href="mailto:$email$">$email$</a></li>
-      $endif$
-      $else$
-      <li><a href="mailto:$email$">$email$</a></li>
-      $endif$
       $endif$
       <!-- homepage -->
       $if(homepage)$
