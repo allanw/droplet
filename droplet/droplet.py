@@ -152,7 +152,7 @@ def cv():
     options += ['--css', 'bootstrap.min.css']
     options += ['--css', 'style.css']
     options += ['--to', 'html5']
-    p = subprocess.Popen(options, stdout=subprocess.PIPE)
+    p = subprocess.Popen(options, stdout=subprocess.PIPE, shell=True)
     stdoutdata, stderrdata = p.communicate()
     f2 = open('/tmp/cv.html', 'w')
     f2.write(stdoutdata)
