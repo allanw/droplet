@@ -39,26 +39,6 @@
     </div>
     <ul class="details">
 
-      <!-- mobile -->
-      $if(mobile)$
-      $if(settings.protect-mobile)$
-      $if(privatecv)$
-      <li><a class='mobile' href="phoneto:$mobile$">$mobile$</a></li>
-      $endif$
-      $else$
-      <li><a class='mobile' href="phoneto:$mobile$">$mobile$</a></li>
-      $endif$
-      $endif$
-      <!-- fax -->
-      $if(fax)$
-      $if(settings.protect-fax)$
-      $if(privatecv)$
-      <li><a class='fax' href="phoneto:$fax$">$fax$</a></li>
-      $endif$
-      $else$
-      <li><a class='fax' href="phoneto:$fax$">$fax$</a></li>
-      $endif$
-      $endif$
       <!-- email -->
       $if(email)$
       $if(settings.protect-email)$
