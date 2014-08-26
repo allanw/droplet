@@ -47,16 +47,6 @@
       $if(homepage)$
       <li><a href="$homepage$" itemprop="url" title="homepage">$homepage$</a></li>
       $endif$
-      <!--if(address)-->
-      <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-        $if(address.city)$
-        <span itemprop="addressLocality">$address.city$,</span>
-        $endif$
-        $if(address.country)$
-        <span itemprop="addressCountry">$address.country$</span>
-        $endif$
-      </li>
-      <!--endif-->
     </ul>
   </header>
 
