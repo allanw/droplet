@@ -1,9 +1,12 @@
-from bottle import route, redirect, request, abort, template, TEMPLATE_PATH, static_file
+from bottle import route, redirect, request, response, abort, template, TEMPLATE_PATH, static_file
 import os
 import markdown
 from dropbox.client import DropboxClient
 from dropbox.session import DropboxSession, OAuthToken
 from contextlib import closing
+import subprocess
+import shutil
+import StringIO
 try:
     import redis
     redis_available = True
@@ -133,3 +136,49 @@ def page(pagename):
     mdown = get_markdown()
     html = mdown.convert(src)
     return template('post', body=html)
+
+@route('/cv')
+@route('/cv.pdf')
+def cv():
+    client = get_client()
+    cv_md = client.get_file(BLOG_POST_DIR + "cv.md").read()
+    f = open('/tmp/cv_md.tmp', 'w')
+    f.write(cv_md)
+    f.close()
+    options = ['pandoc', '/tmp/cv_md.tmp']
+    options += ['--standalone']
+    options += ['--section-divs']
+    options += ['--template', 'droplet/templates/cv.html']
+    options += ['--css', 'bootstrap.min.css']
+    options += ['--css', 'style.css']
+    options += ['--to', 'html5']
+    p = subprocess.Popen(options, stdout=subprocess.PIPE)
+    stdoutdata, stderrdata = p.communicate()
+    f2 = open('/tmp/cv.html', 'w')
+    f2.write(stdoutdata)
+    f2.close()
+    if request.path.endswith('.pdf'):
+        options = ['wkhtmltopdf']
+        options += ['--orientation', 'Portrait']
+        options += ['--page-size', 'A4']
+        options += ['--margin-top', '15']
+        options += ['--margin-left', '15']
+        options += ['--margin-right', '15']
+        options += ['--margin-bottom', '15']
+        options += ['/tmp/cv.html']
+        # Use - to output PDF to stdout
+        options += ['-']
+        # Need to copy style.css and bootstrap.min.css to /tmp/
+        # so they are in the same directory as cv.html
+        shutil.copyfile('droplet/static/css/style.css', '/tmp/style.css')
+        shutil.copyfile('droplet/static/css/bootstrap.min.css', '/tmp/bootstrap.min.css')
+        p = subprocess.Popen(options, stdout=subprocess.PIPE)
+        stdoutdata, stderrdata = p.communicate()
+        cv_pdf = StringIO.StringIO()
+        cv_pdf.write(stdoutdata)
+        response.content_type = 'application/pdf'
+        response.set_header('Content-Disposition', 'attachment; filename="report.pdf"')
+        response.set_header('Content-Length', str(cv_pdf.len))
+        return cv_pdf.getvalue()
+    else:
+        return stdoutdata

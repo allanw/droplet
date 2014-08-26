@@ -36,6 +36,8 @@
                     </li>
                     <li class=""><a href="/about">About</a>
                     </li>
+                    <li class=""><a href="/cv">CV</a>
+                    </li>
                 </ul>
             </div> <!-- .nav-collapse -->
         </div> <!-- .container -->
