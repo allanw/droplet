@@ -142,10 +142,10 @@ def page(pagename):
 def cv():
     client = get_client()
     cv_md = client.get_file(BLOG_POST_DIR + "cv.md").read()
-    f = open('./tmp/cv_md.tmp', 'w')
+    f = open('/tmp/cv_md.tmp', 'w')
     f.write(cv_md)
     f.close()
-    options = ['pandoc', './tmp/cv_md.tmp']
+    options = ['pandoc', '/tmp/cv_md.tmp']
     options += ['--standalone']
     options += ['--section-divs']
     options += ['--template', 'droplet/templates/cv.html']
