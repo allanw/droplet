@@ -151,6 +151,7 @@ def cv():
     options += ['--template', 'droplet/templates/cv.html']
     options += ['--css', 'bootstrap.min.css']
     options += ['--css', 'style.css']
+    options += ['--from', 'markdown+yaml_metadata_block']
     options += ['--to', 'html5']
     p = subprocess.Popen(options, stdout=subprocess.PIPE)
     stdoutdata, stderrdata = p.communicate()
