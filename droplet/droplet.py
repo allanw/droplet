@@ -149,6 +149,7 @@ def about():
 
 @route('/cv')
 @route('/cv.pdf')
+@route('/cv.txt')
 def cv():
     client = get_client()
     cv_md = client.get_file(BLOG_POST_DIR + "cv.md").read()
@@ -189,5 +190,16 @@ def cv():
         response.set_header('Content-Disposition', 'attachment; filename="cv.pdf"')
         response.set_header('Content-Length', str(cv_pdf.len))
         return cv_pdf.getvalue()
+    elif request.path.endswith('.txt'):
+        # plain text CV
+        options = ['pandoc', '/tmp/cv_md.tmp']
+        options += ['--standalone']
+        options += ['--section-divs']
+        options += ['--from', 'markdown+yaml_metadata_block']
+        options += ['--to', 'plain']
+        p = subprocess.Popen(options, stdout=subprocess.PIPE)
+        stdoutdata, stderrdata = p.communicate()
+        response.content_type = 'text/plain'
+        return stdoutdata
     else:
         return stdoutdata
