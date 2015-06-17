@@ -159,7 +159,7 @@ def cv():
     options += ['--standalone']
     options += ['--section-divs']
     options += ['--template', 'droplet/templates/cv.html']
-    options += ['--css', 'style.css']
+    options += ['--css', 'cv_style.css']
     options += ['--from', 'markdown+yaml_metadata_block']
     options += ['--to', 'html5']
     p = subprocess.Popen(options, stdout=subprocess.PIPE)
@@ -169,13 +169,13 @@ def cv():
     f2.close()
     if request.path.endswith('.pdf'):
         options = ['wkhtmltopdf']
-        options += ['--orientation', 'Portrait']
-        options += ['--page-size', 'A4']
-        options += ['--margin-top', '15']
-        options += ['--margin-left', '15']
-        options += ['--margin-right', '15']
-        options += ['--margin-bottom', '15']
-        options += ['/tmp/cv.html']
+        # options += ['--orientation', 'Portrait']
+        # options += ['--page-size', 'A4']
+        # options += ['--margin-top', '15']
+        # options += ['--margin-left', '15']
+        # options += ['--margin-right', '15']
+        # options += ['--margin-bottom', '15']
+        # options += ['/tmp/cv.html']
         # Use - to output PDF to stdout
         options += ['-']
         # Need to copy style.css to /tmp/
