@@ -4,3 +4,4 @@ It uses:
 
 - Bottle framework for routing/templating
 - Redis for caching
+- wkhtmltopdf
