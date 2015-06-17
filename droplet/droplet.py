@@ -168,14 +168,14 @@ def cv():
     f2.write(stdoutdata)
     f2.close()
     if request.path.endswith('.pdf'):
-        options = ['pandoc']
-        # options += ['--orientation', 'Portrait']
-        # options += ['--page-size', 'A4']
-        # options += ['--margin-top', '15']
-        # options += ['--margin-left', '15']
-        # options += ['--margin-right', '15']
-        # options += ['--margin-bottom', '15']
-        # options += ['/tmp/cv.html']
+        options = ['wkhtmltopdf']
+        options += ['--orientation', 'Portrait']
+        options += ['--page-size', 'A4']
+        options += ['--margin-top', '15']
+        options += ['--margin-left', '15']
+        options += ['--margin-right', '15']
+        options += ['--margin-bottom', '15']
+        options += ['/tmp/cv.html']
         # Use - to output PDF to stdout
         options += ['-']
         # Need to copy style.css to /tmp/
