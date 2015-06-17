@@ -159,8 +159,7 @@ def cv():
     options += ['--standalone']
     options += ['--section-divs']
     options += ['--template', 'droplet/templates/cv.html']
-    options += ['--css', 'bootstrap.min.css']
-    options += ['--css', 'style.css']
+    options += ['--css', 'cv_style.css']
     options += ['--from', 'markdown+yaml_metadata_block']
     options += ['--to', 'html5']
     p = subprocess.Popen(options, stdout=subprocess.PIPE)
@@ -179,16 +178,15 @@ def cv():
         options += ['/tmp/cv.html']
         # Use - to output PDF to stdout
         options += ['-']
-        # Need to copy style.css and bootstrap.min.css to /tmp/
-        # so they are in the same directory as cv.html
-        shutil.copyfile('droplet/static/css/style.css', '/tmp/style.css')
-        shutil.copyfile('droplet/static/css/bootstrap.min.css', '/tmp/bootstrap.min.css')
+        # Need to copy style.css /tmp/
+        # so it is in the same directory as cv.html
+        shutil.copyfile('droplet/static/css/cv_style.css', '/tmp/cv_style.css')
         p = subprocess.Popen(options, stdout=subprocess.PIPE)
         stdoutdata, stderrdata = p.communicate()
         cv_pdf = StringIO.StringIO()
         cv_pdf.write(stdoutdata)
         response.content_type = 'application/pdf'
-        response.set_header('Content-Disposition', 'attachment; filename="report.pdf"')
+        response.set_header('Content-Disposition', 'attachment; filename="cv.pdf"')
         response.set_header('Content-Length', str(cv_pdf.len))
         return cv_pdf.getvalue()
     else:

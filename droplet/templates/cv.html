@@ -27,10 +27,7 @@
 </head>
 <body>
   <header itemscope itemtype="http://http://schema.org/Person" class="$if(photo)$with-photo$endif$">
-    <div id="title" class="$if(qrcode)$qrcode$endif$">
-      $if(qrcode)$
-      <img id="qrcode" src="$qrcode$" />
-      $endif$
+    <div id="title">
       <h1 class="fullname">
         <span itemprop="givenName">$firstname$</span>
         <span itemprop="familyName">$lastname$</span>
