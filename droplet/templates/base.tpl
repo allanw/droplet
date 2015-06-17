@@ -21,13 +21,16 @@
     <header id="header">
         <a href="/" id="title" class="index">Home</a>
         <a href="/blog" id="title" class="index">Blog</a>
-        <a href="about.html" id="title" class="index">About</a>
-        <a id="title" class="index">Portfolio</a>
+        <a href="/about" id="title" class="index">About</a>
     </header>
 
     {{ !base }}
 
 </section> <!--wrapper-->
+
+<footer>
+    Powered by <a href="http://allanw.github.io/droplet/">Droplet <i class="fa fa-tint fa-lg"></i></a>
+</footer>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
 

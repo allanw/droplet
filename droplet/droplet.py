@@ -122,6 +122,11 @@ def listing():
 
 @route('/')
 def index():
+    return template('index.tpl')
+
+@route('/blog')
+@route('/blog/')
+def blog():
     return template('list', posts=listing())
 
 @route('/<pagename>')
@@ -136,6 +141,11 @@ def page(pagename):
     mdown = get_markdown()
     html = mdown.convert(src)
     return template('post', body=html)
+
+@route('/about')
+@route('/about/')
+def about():
+    return template('about')
 
 @route('/cv')
 @route('/cv.pdf')
