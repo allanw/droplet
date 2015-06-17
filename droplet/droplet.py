@@ -168,7 +168,7 @@ def cv():
     f2.write(stdoutdata)
     f2.close()
     if request.path.endswith('.pdf'):
-        options = ['wkhtmltopdf']
+        options = ['pandoc']
         # options += ['--orientation', 'Portrait']
         # options += ['--page-size', 'A4']
         # options += ['--margin-top', '15']
