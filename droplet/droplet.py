@@ -178,7 +178,7 @@ def cv():
         options += ['/tmp/cv.html']
         # Use - to output PDF to stdout
         options += ['-']
-        # Need to copy style.css /tmp/
+        # Need to copy style.css to /tmp/
         # so it is in the same directory as cv.html
         shutil.copyfile('droplet/static/css/cv_style.css', '/tmp/cv_style.css')
         p = subprocess.Popen(options, stdout=subprocess.PIPE)
