@@ -159,7 +159,7 @@ def cv():
     options += ['--standalone']
     options += ['--section-divs']
     options += ['--template', 'droplet/templates/cv.html']
-    options += ['--css', 'cv_style.css']
+    options += ['--css', 'style.css']
     options += ['--from', 'markdown+yaml_metadata_block']
     options += ['--to', 'html5']
     p = subprocess.Popen(options, stdout=subprocess.PIPE)
@@ -180,7 +180,7 @@ def cv():
         options += ['-']
         # Need to copy style.css to /tmp/
         # so it is in the same directory as cv.html
-        #shutil.copyfile('droplet/static/css/cv_style.css', '/tmp/cv_style.css')
+        shutil.copyfile('droplet/static/css/cv_style.css', '/tmp/cv_style.css')
         p = subprocess.Popen(options, stdout=subprocess.PIPE)
         stdoutdata, stderrdata = p.communicate()
         cv_pdf = StringIO.StringIO()
