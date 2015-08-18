@@ -7,6 +7,7 @@ from contextlib import closing
 import subprocess
 import shutil
 import StringIO
+import cPickle as pickle
 try:
     import redis
     redis_available = True
@@ -127,20 +128,33 @@ def index():
 @route('/blog')
 @route('/blog/')
 def blog():
-    return template('list', posts=listing())
+    redis_client = redis.from_url(redis_url)
+    l = redis_client.get("listing")
+    if l:
+        return template('list', posts=pickle.loads(l))
+    else:
+        posts = listing()
+        redis_client.set("listing", pickle.dumps(posts))
+        return template('list', posts=posts)
 
 @route('/<pagename>')
 @route('/<pagename>/')
 def page(pagename):
-    client = get_client()
-    post_listing = client.search(BLOG_POST_DIR, ".md")
-    url_listing = [p["path"] for p in post_listing]
-    if BLOG_POST_DIR + pagename + ".md" not in url_listing:
-        abort(404, "File not found")
-    src = client.get_file(BLOG_POST_DIR + pagename + ".md").read()
-    mdown = get_markdown()
-    html = mdown.convert(src)
-    return template('post', body=html)
+    redis_client = redis.from_url(redis_url)
+    p = redis_client.get(pagename)
+    if p:
+        return template('post', body=pickle.loads(p))
+    else:
+        client = get_client()
+        post_listing = client.search(BLOG_POST_DIR, ".md")
+        url_listing = [p["path"] for p in post_listing]
+        if BLOG_POST_DIR + pagename + ".md" not in url_listing:
+            abort(404, "File not found")
+        src = client.get_file(BLOG_POST_DIR + pagename + ".md").read()
+        mdown = get_markdown()
+        html = mdown.convert(src)
+        redis_client.set(pagename, pickle.dumps(html))
+        return template('post', body=html)
 
 @route('/about')
 @route('/about/')
