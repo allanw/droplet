@@ -28,10 +28,6 @@
 
 </section> <!--wrapper-->
 
-<footer>
-    Powered by <a href="http://allanw.github.io/droplet/">Droplet <i class="fa fa-tint fa-lg"></i></a>
-</footer>
-
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
 </body>
