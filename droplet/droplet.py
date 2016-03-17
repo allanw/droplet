@@ -201,7 +201,6 @@ def cv():
         cv_pdf = StringIO.StringIO()
         cv_pdf.write(stdoutdata)
         # foobar
-        return str(cv_pdf.len)
         response.content_type = 'application/pdf'
         response.set_header('Content-Disposition', 'attachment; filename="cv.pdf"')
         response.set_header('Content-Length', str(cv_pdf.len))
