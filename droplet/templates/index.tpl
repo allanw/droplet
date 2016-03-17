@@ -1,6 +1,6 @@
 % rebase('base.tpl', title='Blog posts')
-<h1>Hello</h1>
-<p>I'm Allan Whatmough, a web developer based in London, U.K.</p>
+<h1>Allan Whatmough</h1>
+<p>Web developer</p>
 
 <ul class="list-group list-group-flush">
   <ul class="list-group" id="social">
