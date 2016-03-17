@@ -182,8 +182,7 @@ def cv():
     f2 = open('/tmp/cv.html', 'w')
     f2.write(stdoutdata)
     f2.close()
-    if request.path.endswith('.pdfx'):
-        return 'fizzbuzz'
+    if request.path.endswith('.pdf'):
         options = ['wkhtmltopdf']
         options += ['--orientation', 'Portrait']
         options += ['--page-size', 'A4']
