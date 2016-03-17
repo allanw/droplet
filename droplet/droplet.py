@@ -183,6 +183,7 @@ def cv():
     f2.write(stdoutdata)
     f2.close()
     if request.path.endswith('.pdf'):
+        return 'fizzbuzz'
         options = ['wkhtmltopdf']
         options += ['--orientation', 'Portrait']
         options += ['--page-size', 'A4']
