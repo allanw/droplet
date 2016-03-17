@@ -1,3 +1,3 @@
-https://s3.amazonaws.com/docverter-binaries/pandoc.tar.gz
+https://s3-eu-west-1.amazonaws.com/hubbado-heroku-binaries/pandoc-1.15.0.6.tar.gz
 https://s3.amazonaws.com/docverter-binaries/pandoc-templates.tar.gz
 https://s3.amazonaws.com/allanw.co.uk/wkhtmltopdf-linux-amd64.tar.gz
