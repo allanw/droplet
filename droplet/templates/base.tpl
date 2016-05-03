@@ -20,7 +20,7 @@
 <section id="wrapper">
     <header id="header">
         <a href="/" id="title" class="index">Home</a>
-        <a href="/blog" id="title" class="index">Blog</a>
+        % # <a href="/blog" id="title" class="index">Blog</a>
         <a href="/about" id="title" class="index">About</a>
     </header>
 
