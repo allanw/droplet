@@ -83,6 +83,10 @@ def serve_js(filename):
 def serve_fonts(filename):
     return static_file(filename, root='droplet/static/fonts')
 
+@route('/images/<filename:re:.*\.jpg>')
+def serve_images(filename):
+    return static_file(filename, root='droplet/static/images')
+
 @route('/foo')
 def foo():
     client = get_client()
@@ -160,6 +164,11 @@ def page(pagename):
 @route('/about/')
 def about():
     return template('about')
+
+@route('/portfolio')
+@route('/portfolio/')
+def portfolio():
+    return template('portfolio')
 
 @route('/cv')
 @route('/cv.pdf')
