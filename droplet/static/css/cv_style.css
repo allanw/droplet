@@ -32,7 +32,7 @@ h1 {
 
 /* Titles of categories */
 h2 {
-    color: #397249;
+    color: rgb(22%,45%,70%);
 }
 /* There is a bar just before each category */
 h2:before {
@@ -41,7 +41,7 @@ h2:before {
     margin-right:1%;
     width: 16%;
     height: 10px;
-    background-color: #9CB770;
+    background-color: rgb(22%,45%,70%);
 }
 
 /* Definitions */
@@ -67,13 +67,7 @@ blockquote {
 /* Links */
 a {
     text-decoration: none;
-    color: #397249;
-}
-a:hover, a:active {
-    background-color: #397249;
-    color: #FFFFFF;
-    text-decoration: none;
-    text-shadow: 1px 1px 1px #333;
+    color: rgb(22%,45%,70%);
 }
 
 /* Horizontal separators */
