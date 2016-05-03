@@ -208,6 +208,7 @@ def cv():
     elif request.path.endswith('.txt'):
         # plain text CV
         options = ['pandoc', '/tmp/cv_md.tmp']
+        options += ['--filter', 'strip_headings_and_emphasis.py']
         options += ['--standalone']
         options += ['--section-divs']
         options += ['--from', 'markdown+yaml_metadata_block']
