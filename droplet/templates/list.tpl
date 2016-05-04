@@ -1,4 +1,4 @@
-% rebase('base.tpl', title='Blog posts')
+% rebase('base.tpl', title='Blog posts', current_page='blog')
 <ul>
     % for post in posts:
     <li>

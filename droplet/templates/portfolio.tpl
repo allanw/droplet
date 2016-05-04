@@ -1,4 +1,4 @@
-% rebase('base.tpl', title='Portfolio')
+% rebase('base.tpl', title='Portfolio', current_page='portfolio')
 
 <a id="docs" href="http://cactusformac.com/redirect/#documentation">Documentation</a>
 

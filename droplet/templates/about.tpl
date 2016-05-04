@@ -1,4 +1,4 @@
-% rebase('base.tpl', title='Blog posts')
+% rebase('base.tpl', title='Blog posts', current_page='about')
 <h1>About me</h1>
 <p>I'm a web developer based in London, UK.</p>
 
