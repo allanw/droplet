@@ -1,7 +1,5 @@
 % rebase('base.tpl', title='Projects', current_page='projects')
 
-<a id="docs" href="http://cactusformac.com/redirect/#documentation">Documentation</a>
-
 <section id="thumbnails" class="clearfix">
 	
 		<a href='/posts/project-six.html'>
