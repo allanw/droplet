@@ -1,9 +1,11 @@
 % rebase('base.tpl', title='Blog posts', current_page='blog')
-<ul>
+<ul id="post-list">
     % for post in posts:
     <li>
         <aside class="dates">{{post['date']}}</aside>
-        <a href="{{post['path']}}">{{post['title']}}</a></li>
+        <a href="{{post['path']}}">{{post['title']}}</a>
+    </li>
+    % end
 </ul>
 
   <!--- Uncomment for link to archive.

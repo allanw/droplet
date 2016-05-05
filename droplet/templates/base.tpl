@@ -19,6 +19,7 @@
 
 <section id="wrapper">
     <header id="header">
+        % setdefault('current_page', None)
         <a href="/" class="title {{ 'active' if current_page=='home' else '' }}">Home</a>
         % # <a href="/blog" class="title {{ 'active' if current_page=='blog' else '' }}">Blog</a>
         % # <a href="/portfolio" class="title {{ 'active' if current_page=='portfolio' else '' }}">Portfolio</a>
