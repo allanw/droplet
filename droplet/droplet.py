@@ -165,10 +165,10 @@ def page(pagename):
 def about():
     return template('about')
 
-@route('/portfolio')
-@route('/portfolio/')
-def portfolio():
-    return template('portfolio')
+@route('/projects')
+@route('/projects/')
+def projects():
+    return template('projects')
 
 @route('/cv')
 @route('/cv.pdf')
