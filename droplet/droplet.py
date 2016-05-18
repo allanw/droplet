@@ -83,7 +83,7 @@ def serve_js(filename):
 def serve_fonts(filename):
     return static_file(filename, root='droplet/static/fonts')
 
-@route('/images/<filename:re:.*\.jpg>')
+@route('/images/<filename:re:.*\.(jpg|png)>')
 def serve_images(filename):
     return static_file(filename, root='droplet/static/images')
 

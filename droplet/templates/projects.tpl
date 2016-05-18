@@ -8,7 +8,7 @@
 		</a>
 	
 		<a href='/posts/project-five.html'>
-			<img class="2x" width="300" height="300" src="images/image-thumbnail.jpg"/>
+			<img class="2x" width="300" height="300" src="images/codetutor.png"/>
 			<span>Project Five</span>
 		</a>
 	
