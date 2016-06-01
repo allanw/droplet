@@ -81,3 +81,24 @@ a {
 hr {
     color: #A6A6A6;
 }
+
+/* CV styles */
+@media only screen and (max-width: 768px)  {
+    .cv section#education, .cv section#experience {
+      float: left;
+    }
+}
+
+.cv #education dd {
+    margin-bottom: 1em;
+} 
+
+@media only screen and (max-width: 768px)  {
+    .cv #technical-skills dt {
+         width: 50%;
+     }
+
+    .cv #technical-skills dd {
+         margin-left: 0;
+     }
+}
