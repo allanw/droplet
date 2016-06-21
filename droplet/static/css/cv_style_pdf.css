@@ -48,7 +48,6 @@ h2:before {
 dt {
     float: left;
     clear: left;
-    width: 17%;
     font-weight: bold;
 }
 dd {
