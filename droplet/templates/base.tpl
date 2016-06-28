@@ -16,6 +16,7 @@
 
 <body>
 
+<div id="color-bar"></div>
 
 <section id="wrapper">
     <header id="header">

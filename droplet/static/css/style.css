@@ -552,6 +552,11 @@ h7 { max-width: 80%; }
 h7 { max-width: 100%; }
 }
 
+div#color-bar {
+    background: #4EA3D0;
+    height: 12px;
+}
+
 /* CV styles */
 .cv body {
 	font-family: "Palatino", sans-serif;
