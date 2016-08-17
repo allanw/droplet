@@ -3,7 +3,7 @@
 <section id="thumbnails" class="clearfix">
 	
 		<a href='/posts/project-six.html'>
-			<img class="2x" width="300" height="300" src="images/image-thumbnail.jpg"/>
+			<img class="2x" width="300" height="300" src="images/islingtoncc.png"/>
 			<span>Project Six</span>
 		</a>
 	
@@ -13,7 +13,7 @@
 		</a>
 	
 		<a href='/posts/project-four.html'>
-			<img class="2x" width="300" height="300" src="images/image-thumbnail.jpg"/>
+			<img class="2x" width="300" height="300" src="images/running.png"/>
 			<span>Project Four</span>
 		</a>
 	
