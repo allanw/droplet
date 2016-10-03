@@ -49,6 +49,7 @@ dt {
     float: left;
     clear: left;
     font-weight: bold;
+    font-size: 14px;
 }
 dd {
     margin-left: 17%;
