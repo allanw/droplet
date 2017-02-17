@@ -2,7 +2,7 @@
 <div class="profile">
   <img id="avatar" src="images/avatar.png">
   <h1>Allan Whatmough</h1>
-  <p>Web Developer &bull; Data Analyst</p>
+  <p>Web Developer &bull; Data Engineer</p>
 </div>
 
 <ul class="list-group list-group-flush">
