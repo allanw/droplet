@@ -57,6 +57,10 @@ body {
 	text-rendering:optimizeLegibility;
 }
 
+p {
+	font-family: "Merriweather", Georgia, serif;
+}
+
 #wrapper {
 	padding:100px 40px 100px 40px;
 	max-width:600px;

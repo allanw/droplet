@@ -8,6 +8,7 @@
     <title>Al's blog</title>
 
     <link rel="stylesheet" type="text/css" href="font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css">
 
     <!-- Custom styles -->
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -23,7 +24,7 @@
         % setdefault('current_page', None)
         <a href="/" class="title {{ 'active' if current_page=='home' else '' }}">Home</a>
         % # <a href="/blog" class="title {{ 'active' if current_page=='blog' else '' }}">Blog</a>
-        % # <a href="/projects" class="title {{ 'active' if current_page=='projects' else '' }}">Projects</a>
+        <a href="/projects" class="title {{ 'active' if current_page=='projects' else '' }}">Projects</a>
         <a href="/about" class="title {{ 'active' if current_page=='about' else '' }}">About</a>
     </header>
 
