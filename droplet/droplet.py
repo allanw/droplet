@@ -87,6 +87,10 @@ def listing():
 def index():
     return template('index.tpl')
 
+@route('/login')
+def do_login():
+    return 'hello'
+
 @route('/blog')
 @route('/blog/')
 def blog():
