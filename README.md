@@ -17,8 +17,3 @@ Updated to run on Heroku 18
 allanwblog Buildpack URL
 https://github.com/allanw/heroku-buildpack-multi.git
 ```
-
-
-
-
-
