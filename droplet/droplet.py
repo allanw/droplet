@@ -13,8 +13,6 @@ try:
 except ImportError:
     redis_available = False
 
-APP_KEY = os.environ['DROPBOX_APP_KEY']
-APP_SECRET = os.environ['DROPBOX_APP_SECRET']
 DROPBOX_ACCESS_KEY = os.environ['DROPBOX_ACCESS_KEY']
 
 BLOG_POST_DIR = '/posts/'
