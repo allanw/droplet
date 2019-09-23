@@ -10,6 +10,8 @@ N.B. Tested with Pandoc version 1.16. Later versions (2.0+) don't currently work
 
 ## Heroku buildpack
 
+Updated to run on Heroku 18
+
 `$ heroku buildpacks --app allanwblog`
 ```
 allanwblog Buildpack URL
