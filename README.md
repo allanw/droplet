@@ -1,4 +1,4 @@
-A simple Dropbox-based blog generator built using Bottle.
+Dropbox-based blog generator built using Bottle.
 
 It uses:
 
