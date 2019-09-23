@@ -5,8 +5,8 @@ import dropbox
 from contextlib import closing
 import subprocess
 import shutil
-import StringIO
-import cPickle as pickle
+from io import StringIO, BytesIO
+import pickle
 try:
     import redis
     redis_available = True
@@ -62,13 +62,13 @@ def get_markdown():
 
 def listing():
     client = get_client()
-    files = client.search(BLOG_POST_DIR, ".md")
+    files = client.files_search(BLOG_POST_DIR, ".md")
     posts = []
-    for f in files:
-        src = client.get_file(f['path']).read()
+    for f in files.matches:
+        metadata, res = client.files_download(BLOG_POST_DIR + f.metadata.name)
         mdown = get_markdown()
         try:
-            html = mdown.convert(src)
+            html = mdown.convert(res.content)
         except UnicodeDecodeError as e:
             print(f['path'], e)
         try:
@@ -106,19 +106,21 @@ def blog():
 @route('/<pagename>')
 @route('/<pagename>/')
 def page(pagename):
+    if pagename == 'favicon.ico':
+      return
     redis_client = redis.from_url(redis_url)
     p = redis_client.get(pagename)
     if p:
         return template('post', body=pickle.loads(p))
     else:
         client = get_client()
-        post_listing = client.files_list_folder("/posts/*.md")
-        url_listing = [p["path"] for p in post_listing]
-        if BLOG_POST_DIR + pagename + ".md" not in url_listing:
-            abort(404, "File not found")
-        src = client.files_download(BLOG_POST_DIR + pagename + ".md").read()
+        #post_listing = client.files_list_folder("/posts/*.md")
+        #url_listing = [p["path"] for p in post_listing]
+        #if BLOG_POST_DIR + pagename + ".md" not in url_listing:
+        #    abort(404, "File not found")
+        metadata, res = client.files_download(BLOG_POST_DIR + pagename + ".md")
         mdown = get_markdown()
-        html = mdown.convert(src)
+        html = mdown.convert(str(res.content, "utf-8"))
         redis_client.set(pagename, pickle.dumps(html))
         return template('post', body=html)
 
@@ -140,7 +142,7 @@ def cv():
     metadata, res = client.files_download(BLOG_POST_DIR + "cv.md")
     cv_md = res.content
     f = open('/tmp/cv_md.tmp', 'w')
-    f.write(cv_md)
+    f.write(str(cv_md, "utf-8"))
     f.close()
     options = ['pandoc', '/tmp/cv_md.tmp']
     options += ['--standalone']
@@ -152,7 +154,7 @@ def cv():
     p = subprocess.Popen(options, stdout=subprocess.PIPE)
     stdoutdata, stderrdata = p.communicate()
     f2 = open('/tmp/cv.html', 'w')
-    f2.write(stdoutdata)
+    f2.write(str(stdoutdata, "utf-8"))
     f2.close()
     if request.path.endswith('.pdf'):
         options = ['wkhtmltopdf']
@@ -171,12 +173,13 @@ def cv():
         shutil.copyfile('droplet/static/css/cv_style_pdf.css', '/tmp/cv_style.css')
         p = subprocess.Popen(options, stdout=subprocess.PIPE)
         stdoutdata, stderrdata = p.communicate()
-        cv_pdf = StringIO.StringIO()
-        cv_pdf.write(stdoutdata)
+        #cv_pdf = StringIO()
+        cv_pdf = BytesIO()
+        length = cv_pdf.write(stdoutdata)
         # foobar
         response.content_type = 'application/pdf'
         response.set_header('Content-Disposition', 'attachment; filename="cv.pdf"')
-        response.set_header('Content-Length', str(cv_pdf.len)) 
+        response.set_header('Content-Length', str(length)) 
         return cv_pdf.getvalue()
     elif request.path.endswith('.txt'):
         # plain text CV
