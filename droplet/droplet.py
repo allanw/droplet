@@ -155,7 +155,7 @@ def cv():
     f2.write(str(stdoutdata, "utf-8"))
     f2.close()
     if request.path.endswith('.pdf'):
-        options = ['wkhtmltopdf']
+        options = ['/app/bin/wkhtmltopdf']
         options += ['--orientation', 'Portrait']
         options += ['--page-size', 'A4']
         options += ['--margin-top', '15']
