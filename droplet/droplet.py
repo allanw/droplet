@@ -195,5 +195,9 @@ def cv():
 @route('/foo')
 def foo():
   response.content_type = 'application/json'
-  resp = {"french": {"url": "http://allanwblog-heroku-18.herokuapp.com/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cd", "name": "french"}}
+  resp = {"french": {"url": "http://allanwblog-heroku-18.herokuapp.com/foo/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cd", "name": "french"}}
   return json.dumps(resp)
+
+@route('/foo/<filepath:path>')
+def french(filepath):
+  return static_file(filepath, root='droplet/static/')
