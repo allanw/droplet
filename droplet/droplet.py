@@ -7,6 +7,7 @@ import subprocess
 import shutil
 from io import StringIO, BytesIO
 import pickle
+import json
 try:
     import redis
     redis_available = True
@@ -189,3 +190,10 @@ def cv():
         return stdoutdata
     else:
         return stdoutdata
+
+
+@route('/foo')
+def foo():
+  response.content_type = 'application/json'
+  resp = {"french": {"url": "http://allanwblog-heroku-18.herokuuapp.com/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cd", "name": "french"}}
+  return json.dumps(resp)
