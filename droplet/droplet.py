@@ -196,7 +196,7 @@ def cv():
 def foo():
   response.content_type = 'application/json'
 #   resp = {"french": {"url": "http://allanwblog-heroku-18.herokuapp.com/foo/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cd", "name": "french"}}
-  resp = {"shoedog": {"url": "https://www.dropbox.com/s/1rmkgn1vu244q49/shoedog.mp3?dl=1", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cg", "name": "shoedog"}}
+  resp = {"shoedog": {"url": "http://www.dropbox.com/s/1rmkgn1vu244q49/shoedog.mp3?dl=1", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cg", "name": "shoedog"}}
   return json.dumps(resp)
 
 @route('/foo/<filepath:path>')
