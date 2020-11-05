@@ -213,3 +213,7 @@ def french(filepath):
       response.set_header('Content-Length', len(res.content))
       return res.content
 #  return static_file(filepath, root='droplet/static/')
+
+@route('/bar/')
+def bar():
+  return 'hi'
