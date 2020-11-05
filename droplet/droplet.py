@@ -196,7 +196,7 @@ def cv():
 def foo():
   response.content_type = 'application/json'
 #  resp = {"piano": {"url": "http://allanwblog-heroku-18.herokuapp.com/foo/piano2-CoolEdit.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15ce", "name": "piano"}}
-  resp = {"french": {"url": "http://allanwblog-heroku-18.herokuapp.com/foo/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cf", "name": "french"}}
+  resp = {"french": {"url": "https://allanwblog-heroku-18.herokuapp.com/foo/french.mp3", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cf", "name": "french"}}
 #  resp = {"shoedog": {"url": "http://www.dropbox.com/s/1rmkgn1vu244q49/shoedog.mp3?dl=1", "type": "mp3", "canSkip": "true", "id": "ded84ffd4b8b47c9755652c2143c15cg", "name": "shoedog"}}
   return json.dumps(resp)
 
