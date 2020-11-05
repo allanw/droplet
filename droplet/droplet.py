@@ -214,6 +214,6 @@ def french(filepath):
       return res.content
 #  return static_file(filepath, root='droplet/static/')
 
-@route('/bar/')
+@route('/bar/', method='POST')
 def bar():
   return 'hi'
