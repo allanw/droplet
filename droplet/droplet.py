@@ -201,12 +201,12 @@ def foo():
 
 @route('/foo/<filepath:path>')
 def french(filepath):
-  client = get_client()
-  files = client.files_search('', '.mp3')
-  for file in files.matches:
-    if file.metadata.name == 'piano2-CoolEdit.mp3':
-      metadata, res = client.files_download(file.metadata.path_lower)
-      response.content_type = 'audio/mpeg'
-      response.set_header('Content-Disposition', 'attachment; filename="piano2-CoolEdit.mp3"')
-      return res.content
-  #return static_file(filepath, root='droplet/static/')
+  #client = get_client()
+  #files = client.files_search('', '.mp3')
+  #for file in files.matches:
+  #  if file.metadata.name == 'piano2-CoolEdit.mp3':
+  #    metadata, res = client.files_download(file.metadata.path_lower)
+  #    response.content_type = 'audio/mpeg'
+  #    response.set_header('Content-Disposition', 'attachment; filename="piano2-CoolEdit.mp3"')
+  #    return res.content
+  return static_file(filepath, root='droplet/static/')
