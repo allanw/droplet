@@ -170,6 +170,7 @@ def cv():
         # so it is in the same directory as cv.html
         # I am using a slightly different cv_style CSS file (cv_style_pdf.css) for PDFs
         shutil.copyfile('droplet/static/css/cv_style_pdf.css', '/tmp/cv_style.css')
+        shutil.copyfile('droplet/static/fonts/lmsans17-regular.otf', '/tmp/lmsans17-regular.otf')
         p = subprocess.Popen(options, stdout=subprocess.PIPE)
         stdoutdata, stderrdata = p.communicate()
         #cv_pdf = StringIO()

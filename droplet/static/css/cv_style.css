@@ -9,11 +9,16 @@
 
 /* Whole document */
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "lmsans17-regular";
     margin: auto;
     width: 800px;
     background: #FFFFFF;
     padding: 10px 10px 10px 10px;
+}
+
+@font-face {
+   font-family: "lmsans17-regular";
+   src: url("/fonts/lmsans17-regular.otf");
 }
 
 @media only screen and (max-width: 768px) {
