@@ -1,4 +1,4 @@
-bottle==0.12.5
+bottle==0.12.19
 dropbox==9.3.0
 Markdown==2.4
 Pygments==1.6
